@@ -2,7 +2,10 @@
 FROM ubuntu:latest
 
 # Set environment variables to avoid prompts during package installation
-RUN apt-get update && apt install -y python3.10 python3-pip
+RUN apt-get update && apt install -y \
+python3.10  \
+python3-pip \
+git
 
 # Install PyYAML package using pip
 RUN pip3 install PyYAML
