@@ -7,8 +7,13 @@ git config --global user.name "${GITHUB_ACTOR}"
 git config --global user.email "${INPUT_EMAIL}"
 git config --global --add safe.directory /github/workspace
 
+# Activate the virtual environment
+source /opt/venv/bin/activate
+
 # Run the Python script
-python3 /usr/bin/feed.py
+exec python /usr/bin/feed.py
+# Run the Python script
+#python3 /usr/bin/feed.py
 
 # Add all changes to the staging area
 git add -A
