@@ -15,5 +15,5 @@ inputs:
     name:
      description: "The commiter`s username Address"
       required: true
-      default: ${{ GITHUB_ACTOR }}@localhost
+      default: ${{ GITHUB_ACTOR }}
       
