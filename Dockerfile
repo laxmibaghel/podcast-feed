@@ -2,10 +2,16 @@
 FROM ubuntu:latest
 
 # Set environment variables to avoid prompts during package installation
-RUN apt-get update && apt install -y \
-python3.10  \
-python3-pip \
-git
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Update the package list and install Python 3.10, pip, and git
+RUN apt-get update && \
+    apt-get install -y \
+        python3.10 \
+        python3-pip \
+        git && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 # Install PyYAML package using pip
 RUN pip3 install PyYAML
@@ -21,10 +27,3 @@ RUN chmod +x /entrypoint.sh
 
 # Set the entrypoint to the entrypoint script
 ENTRYPOINT ["/entrypoint.sh"]
-
-
-
-
-
-
-
