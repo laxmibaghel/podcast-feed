@@ -4,7 +4,7 @@ FROM ubuntu:latest
 # Set environment variables to avoid prompts during package installation
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Install required packages including Python and pip
+# Install required packages including Python, pip, and virtual environment tools
 RUN apt-get update && \
     apt-get install -y \
         python3 \
@@ -14,11 +14,14 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# Upgrade pip to the latest version
-RUN python3 -m pip install --upgrade pip
+# Create and activate a virtual environment
+RUN python3 -m venv /opt/venv
 
-# Install PyYAML package using pip
-RUN python3 -m pip install PyYAML
+# Upgrade pip in the virtual environment
+RUN /opt/venv/bin/python -m pip install --upgrade pip
+
+# Install PyYAML package using pip from the virtual environment
+RUN /opt/venv/bin/python -m pip install PyYAML
 
 # Copy the Python script to the /usr/bin directory
 COPY feed.py /usr/bin/feed.py
